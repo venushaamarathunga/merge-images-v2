@@ -99,7 +99,11 @@ const mergeImages = (sources = [], options = {}) => new Promise(resolve => {
 			}
 
 			// Resolve all other data URIs sync
-			return canvas.toDataURL(options.format, options.quality);
+			//return canvas.toDataURL(options.format, options.quality);
+			return new Promise((resolve, reject) => {
+                        	const pngStream = canvas.createPNGStream({ resolution: 300 });
+                        	resolve(pngStream);
+                    	});
 		}));
 });
 
